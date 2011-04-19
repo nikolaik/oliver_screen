@@ -1,0 +1,3 @@
+{% if played %}
+{{ played.artist }} - {{ played.title }} <span class="small">{{ played.playback_date|timesince:played.utcnow }} ago.</span><br />
+{% endif %}

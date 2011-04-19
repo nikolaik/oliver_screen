@@ -1,0 +1,7 @@
+{% if now_playing %}
+    <img src="{{ now_playing.image}}" class="now_playing" /><br />
+    <img src="/static/eq.gif" /> {{ now_playing.artist}} - {{ now_playing.title }} ♪♫<br />
+{% else %}
+    <img src="/static/no_music_makes_me_sick_by_sakgaa.jpg" /><br />
+    :[
+{% endif %}

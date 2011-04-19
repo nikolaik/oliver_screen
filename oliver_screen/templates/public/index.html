@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+    <title>Current track</title>
+        <link rel="stylesheet"  type="text/css" href="/static/screen.css" />
+        <script type="text/javascript" src="/static/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="/static/jquery.timers-1.2.js"></script>
+        <script type="text/javascript">
+            /* Function that updates the capacities */
+            var get_last_track = function() {
+                $( '#last_track' ).load(
+                    '/tracks/last');
+            };
+            var get_now_playing = function() {
+                $( '#now_playing' ).load(
+                    '/tracks/now_playing/');
+            };
+            /* Initial update */
+            $( document ).ready( get_last_track );
+            $( document ).ready( get_now_playing );
+			/* Start timers updating a screen resource. */
+			$( document).everyTime('30s', get_last_track );
+			$( document).everyTime('30s', get_now_playing );
+
+			/* Ajax spinner */
+			$( document ).ajaxStart( function() {
+					$( '#spinner' ).show();
+					}).ajaxStop( function() {
+						$( '#spinner' ).hide();
+                        resize_img();
+					});
+            /* resize images to fit screen (ugly) */
+            function resize_img() {
+                var image = $("img.now_playing");
+                if(image.height() > 600) {
+                    image.height(600);
+                }
+                else if(image.width() > 1000) {
+                    image.width(1000);
+                }
+            }
+            /* TODO: if the current song is a tetris song, then do something. */
+		  </script>
+	</head>
+
+	<body>
+    <div id="spinner"><img src="/static/spinner.gif"/></div>
+	<div id="container">
+        <div id="content">
+            <div id="now_playing"></div>
+            <div id="last_track"></div>
+        </div>
+	</div>
+	</body>
+</html>

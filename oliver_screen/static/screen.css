@@ -1,0 +1,55 @@
+a:visited {
+    color:blue;
+}
+a:active {
+    color:blue;
+}
+a {
+    color:blue;
+}
+body {
+    background-color:#000000;
+    color:#ffffff;
+    font-family:Georgia;
+    height:100%;
+    padding:0;
+    text-align:center;
+    text-shadow: 0px 0px 10px #aaa;
+}
+div#container {
+    display:table;
+    margin:auto;
+    width:1200px;
+    height:875px;
+    position:relative;
+    overflow:hidden;
+}
+div#content {
+    display:table-cell;
+    vertical-align:middle;
+}
+div#now_playing {
+    font-size:3.5em;
+}
+div#now_playing img {
+    margin:auto;
+}
+div#last_track {
+    margin-top:20px;
+    font-size:1.5em;
+}
+.bold {
+    font-weight:bold;
+}
+.small {
+    font-size:0.6em;
+}
+#spinner {
+    display: none;
+    position: fixed;
+	top:20px;
+	left:20px;
+    width:20px;
+    height:20px;
+}
+
