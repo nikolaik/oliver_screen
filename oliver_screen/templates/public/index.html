@@ -3,18 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
     <title>Current track</title>
-        <link rel="stylesheet"  type="text/css" href="/static/screen.css" />
-        <script type="text/javascript" src="/static/jquery-1.5.2.min.js"></script>
-        <script type="text/javascript" src="/static/jquery.timers-1.2.js"></script>
+        <link rel="stylesheet"  type="text/css" href="/oliver/static/screen.css" />
+        <script type="text/javascript" src="/oliver/static/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="/oliver/static/jquery.timers-1.2.js"></script>
         <script type="text/javascript">
             /* Function that updates the capacities */
             var get_last_track = function() {
                 $( '#last_track' ).load(
-                    '/tracks/last');
+                    '/oliver/tracks/last');
             };
             var get_now_playing = function() {
                 $( '#now_playing' ).load(
-                    '/tracks/now_playing/');
+                    '/oliver/tracks/now_playing/');
             };
             /* Initial update */
             $( document ).ready( get_last_track );
@@ -45,7 +45,7 @@
 	</head>
 
 	<body>
-    <div id="spinner"><img src="/static/spinner.gif"/></div>
+    <div id="spinner"><img src="/oliver/static/spinner.gif"/></div>
 	<div id="container">
         <div id="content">
             <div id="now_playing"></div>
