@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+
 import pylast
 from datetime import datetime
 from oliver_screen import settings
@@ -25,7 +27,7 @@ def get_now_playing(request):
     if not track is None:
         artist = track.get_artist()
         now_playing = { 'artist': artist.get_name(), 'title': track.get_title(), 'image': artist.get_images(limit=1)[0].sizes.original}
-    return render_to_response("public/now_playing.html", {'now_playing':now_playing});
+    return render_to_response("public/now_playing.html", {'now_playing':now_playing}, context_instance=RequestContext(request));
 
 # Mock views
 def dummy_get_last_track(request):

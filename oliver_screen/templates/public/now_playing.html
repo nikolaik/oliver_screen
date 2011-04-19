@@ -1,7 +1,7 @@
 {% if now_playing %}
     <img src="{{ now_playing.image}}" class="now_playing" /><br />
-    <img src="/oliver/static/eq.gif" /> {{ now_playing.artist}} - {{ now_playing.title }} ♪♫<br />
+    <img src="{{ MEDIA_URL}}eq.gif" /> {{ now_playing.artist}} - {{ now_playing.title }} ♪♫<br />
 {% else %}
-    <img src="/oliver/static/no_music_makes_me_sick_by_sakgaa.jpg" /><br />
+    <img src="{{ MEDIA_URL}}no_music_makes_me_sick_by_sakgaa.jpg" /><br />
     :[
 {% endif %}

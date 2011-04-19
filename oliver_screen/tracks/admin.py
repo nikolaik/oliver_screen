@@ -3,7 +3,7 @@ from django.contrib import admin
 
 class LastFMAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None, {'fields': ['apikey','apisecret','user']})
+		(None, {'fields': ['user']})
 	]
 
 admin.site.register(LastFMSettings, LastFMAdmin)
