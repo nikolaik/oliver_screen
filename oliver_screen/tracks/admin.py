@@ -1,9 +1,9 @@
-from oliver_screen.tracks.models import LastFMSettings
+from oliver_screen.tracks.models import LastFMUser
 from django.contrib import admin
 
 class LastFMAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None, {'fields': ['user']})
+		(None, {'fields': ['name','active']})
 	]
 
-admin.site.register(LastFMSettings, LastFMAdmin)
+admin.site.register(LastFMUser, LastFMAdmin)

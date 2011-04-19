@@ -2,15 +2,25 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
+from oliver_screen.tracks.models import LastFMUser
+
 import pylast
 from datetime import datetime
 from oliver_screen import settings
 
 network = pylast.LastFMNetwork(api_key = settings.LASTFM_API_KEY, api_secret = settings.LASTFM_API_SECRET)
-user = network.get_user('nikkiiin') # FIXME: put in admin interface
+
+def get_lastfmuser():
+    lastfmusers = LastFMUser.objects.filter(active='yes')
+    if len(lastfmusers) != 1:
+        # default
+        return network.get_user('kakdns')
+
+    return network.get_user(lastfmusers[0].name)
 
 # My views
 def get_last_track(request):
+    user = get_lastfmuser()
     playedtracks = user.get_recent_tracks(limit=2)
     playback_date  = datetime.strptime(playedtracks[0].playback_date, "%d %b %Y, %H:%M")
     played = {'artist': playedtracks[0].track.get_artist().get_name(),
@@ -22,6 +32,7 @@ def get_last_track(request):
     return render_to_response("public/tracks.html", {'played':played});
 
 def get_now_playing(request):
+    user = get_lastfmuser()
     track = user.get_now_playing()
     now_playing = []
     if not track is None:
