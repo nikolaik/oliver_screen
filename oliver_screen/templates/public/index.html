@@ -10,26 +10,27 @@
             /* Function that updates the capacities */
             var get_last_track = function() {
                 $( '#last_track' ).load(
-                    '{% url tracks.views.get_last_track %}');
+                        '{% url tracks.views.get_last_track %}');
             };
             var get_now_playing = function() {
                 $( '#now_playing' ).load(
-                    '{% url tracks.views.get_now_playing %}');
+                    '{% url tracks.views.get_now_playing %}', function() {
+                            resize_img();
+                            });
             };
             /* Initial update */
             $( document ).ready( get_last_track );
             $( document ).ready( get_now_playing );
-			/* Start timers updating a screen resource. */
-			$( document).everyTime('30s', get_last_track );
-			$( document).everyTime('30s', get_now_playing );
+            /* Start timers updating a screen resource. */
+            $( document).everyTime('30s', get_last_track );
+            $( document).everyTime('30s', get_now_playing );
 
-			/* Ajax spinner */
-			$( document ).ajaxStart( function() {
-					$( '#spinner' ).show();
-					}).ajaxStop( function() {
-						$( '#spinner' ).hide();
-                        resize_img();
-					});
+            /* Ajax spinner */
+            $( document ).ajaxStart( function() {
+                $( '#spinner' ).show();
+                }).ajaxStop( function() {
+                    $( '#spinner' ).hide();
+                    });
             /* resize images to fit screen (ugly) */
             function resize_img() {
                 var image = $("img.now_playing");
@@ -41,16 +42,16 @@
                 }
             }
             /* TODO: if the current song is a tetris song, then do something. */
-		  </script>
-	</head>
+        </script>
+    </head>
 
-	<body>
-            <div id="spinner"><img src="{{ MEDIA_URL }}spinner.gif"/></div>
-	<div id="container">
-        <div id="content">
-            <div id="now_playing"></div>
-            <div id="last_track"></div>
+    <body>
+        <div id="spinner"><img src="{{ MEDIA_URL }}spinner.gif"/></div>
+        <div id="container">
+            <div id="content">
+                <div id="now_playing"></div>
+                <div id="last_track"></div>
+            </div>
         </div>
-	</div>
-	</body>
+    </body>
 </html>
