@@ -27,8 +27,8 @@
             $( document ).ready( get_last_track );
             $( document ).ready( get_now_playing );
             /* Start timers updating a screen resource. */
-            $( document).everyTime('30s', get_last_track );
-            $( document).everyTime('30s', get_now_playing );
+            $( document).everyTime('10s', get_last_track );
+            $( document).everyTime('10s', get_now_playing );
 
             /* Ajax spinner */
             $( document ).ajaxStart( function() {
