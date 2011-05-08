@@ -37,7 +37,10 @@ def get_now_playing(request):
     now_playing = []
     if not track is None:
         artist = track.get_artist()
-        now_playing = { 'artist': artist.get_name(), 'title': track.get_title(), 'image': artist.get_images(limit=1)[0].sizes.original}
+        image = artist.get_images(limit=1)
+        if len(image) > 0:
+            image = image[0].sizes.original
+        now_playing = { 'artist': artist.get_name(), 'title': track.get_title(), 'image': image}
     return render_to_response("public/now_playing.html", {'now_playing':now_playing}, context_instance=RequestContext(request));
 
 # Mock views

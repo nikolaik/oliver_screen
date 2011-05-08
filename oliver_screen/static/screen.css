@@ -22,7 +22,6 @@ div#container {
     width:1200px;
     height:950px;
     position:relative;
-    overflow:hidden;
 }
 div#content {
     display:table-cell;
@@ -47,9 +46,77 @@ div#last_track {
 #spinner {
     display: none;
     position: fixed;
-	top:20px;
-	left:20px;
+    top:20px;
+    left:20px;
     width:20px;
     height:20px;
 }
 
+/* Falling tetris pieces */
+
+/* rotation-classes */
+.deg0 {
+    -webkit-transform:rotate(0deg);
+}
+.deg90 {
+    -webkit-transform:rotate(90deg);
+}
+.deg180 {
+    -webkit-transform:rotate(180deg);
+}
+.deg270 {
+    -webkit-transform:rotate(270deg);
+}
+
+#gameContainer {
+    right:0px;
+    top:0px;
+    position: absolute;
+    height: 950px;
+    width: 500px;
+    margin: 0px;
+    overflow: hidden;
+    display:none;
+}
+
+/* Defines the position and dimensions of the brickContainer div */
+#brickContainer 
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* This CSS rule is applied to all div elements in the brickContainer div.
+   It styles and animates each brickDiv.
+*/
+#brickContainer > div 
+{
+    position: absolute;
+    
+    /* We use the following properties to apply the fade and drop animations to each brick.
+       Each of these properties takes two values. These values respectively match a setting
+       for fade and drop.
+    */
+    -webkit-animation-iteration-count: infinite, infinite;
+    -webkit-animation-direction: normal, normal;
+    -webkit-animation-timing-function: linear, ease-in;
+}
+
+/* Makes a brick fall from -200 to 950 pixels in the y-axis */
+@-webkit-keyframes drop
+{
+    /* Move a brick to -200 pixels in the y-axis at the start of the animation */
+    0%   { -webkit-transform: translate(0px, -200px); }
+    /* Move a brick to 950 pixels in the y-axis at the end of the animation */
+    100% { -webkit-transform: translate(0px, 950px); }
+}
+
+/* Hides a brick towards the very end of the animation */
+@-webkit-keyframes fade
+{
+    /* Show a brick while into or below 95 percent of the animation and hide it, otherwise */
+    0%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { opacity: 0; }
+}

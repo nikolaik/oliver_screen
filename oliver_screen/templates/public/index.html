@@ -6,6 +6,7 @@
         <link rel="stylesheet"  type="text/css" href="{{ MEDIA_URL }}screen.css" />
         <script type="text/javascript" src="{{ MEDIA_URL }}jquery-1.5.2.min.js"></script>
         <script type="text/javascript" src="{{ MEDIA_URL }}jquery.timers-1.2.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}falling_pieces.js"></script>
         <script type="text/javascript">
             /* Function that updates the capacities */
             var get_last_track = function() {
@@ -16,7 +17,7 @@
                 $( '#now_playing' ).load(
                     '{% url tracks.views.get_now_playing %}', function() {
                             resize_img();
-                            if(is_tetris_song()) {
+                            if( is_tetris_song() ) {
                                 play_tetris();
                             } else {
                                 dont_play_tetris();
@@ -27,8 +28,8 @@
             $( document ).ready( get_last_track );
             $( document ).ready( get_now_playing );
             /* Start timers updating a screen resource. */
-            $( document).everyTime('10s', get_last_track );
-            $( document).everyTime('10s', get_now_playing );
+            $( document ).everyTime('10s', get_last_track );
+            $( document ).everyTime('10s', get_now_playing );
 
             /* Ajax spinner */
             $( document ).ajaxStart( function() {
@@ -45,17 +46,6 @@
                 else if(image.width() > 1000) {
                     image.width(1000);
                 }
-            }
-            function is_tetris_song() {
-                $("#now_playing").filter(function(){
-                        return /Tetris|Korobeiniki/i.test( $(this).text() );
-                        });
-            }
-            function play_tetris() {
-                $("game").show();
-            }
-            function dont_play_tetris() {
-                $("game").hide();
             }
             /* TODO: if the current song is a tetris song, then do something. */
         </script>
@@ -74,5 +64,9 @@
             </div>-->
         <!--<script type="text/javascript" src="{{ MEDIA_URL }}tetris.js"></script>-->
         </div>
+        <div id="gameContainer">
+            <div id="brickContainer"></div>
+        </div>
+
     </body>
 </html>
