@@ -3,3 +3,4 @@
 *.swo
 settings.py
 oliver_screen.sqlite3
+django.wsgi
