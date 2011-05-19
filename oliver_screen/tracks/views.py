@@ -35,12 +35,19 @@ def get_now_playing(request):
     user = get_lastfmuser()
     track = user.get_now_playing()
     now_playing = []
+    video = ""
     if not track is None:
         artist = track.get_artist()
         image = artist.get_images(limit=1)
         if len(image) > 0:
             image = image[0].sizes.original
-        now_playing = { 'artist': artist.get_name(), 'title': track.get_title(), 'image': image}
+
+        now_playing = {
+            'artist': artist.get_name(),
+            'title': track.get_title(),
+            'image': image,
+            'video': video
+        }
     return render_to_response("public/now_playing.html", {'now_playing':now_playing}, context_instance=RequestContext(request));
 
 # Mock views
