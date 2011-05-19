@@ -1,4 +1,4 @@
-from oliver_screen.tracks.models import LastFMUser
+from oliver_screen.tracks.models import LastFMUser, YouTubeVideo
 from django.contrib import admin
 
 class LastFMAdmin(admin.ModelAdmin):
@@ -6,4 +6,10 @@ class LastFMAdmin(admin.ModelAdmin):
 		(None, {'fields': ['name','active']})
 	]
 
+class VideoAdmin(admin.ModelAdmin):
+	fieldsets = [
+		(None, {'fields': ['title','artist', 'videoId', 'start', 'active']})
+	]
+
 admin.site.register(LastFMUser, LastFMAdmin)
+admin.site.register(YouTubeVideo, VideoAdmin)

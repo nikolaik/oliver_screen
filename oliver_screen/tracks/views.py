@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from oliver_screen.tracks.models import LastFMUser
+from oliver_screen.tracks.models import LastFMUser, YouTubeVideo
 
 import pylast
 from datetime import datetime
@@ -11,12 +11,21 @@ from oliver_screen import settings
 network = pylast.LastFMNetwork(api_key = settings.LASTFM_API_KEY, api_secret = settings.LASTFM_API_SECRET)
 
 def get_lastfmuser():
-    lastfmusers = LastFMUser.objects.filter(active='yes')
+    lastfmusers = LastFMUser.objects.filter(active=True)
     if len(lastfmusers) != 1:
         # default
         return network.get_user('kakdns')
 
     return network.get_user(lastfmusers[0].name)
+
+def get_youtubevideo(artist, title):
+    videos = YouTubeVideo.objects.filter(artist=artist, title=title)
+    if len(videos) != 1:
+        # should only be one
+        return ""
+    return videos[0]
+
+
 
 # My views
 def get_last_track(request):
@@ -38,6 +47,7 @@ def get_now_playing(request):
     video = ""
     if not track is None:
         artist = track.get_artist()
+        video = get_youtubevideo(artist.get_name(), track.get_title())
         image = artist.get_images(limit=1)
         if len(image) > 0:
             image = image[0].sizes.original

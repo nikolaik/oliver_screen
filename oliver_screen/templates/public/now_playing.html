@@ -1,12 +1,12 @@
 {% if now_playing %}
     {% if now_playing.video %}
-        <iframe src="{{ now_playing.video }}" width="100%" height="100%" /> 
+        <iframe src="http://www.youtube.com/embed/{{ now_playing.video.videoId }}?enablejsapi=1" frameborder="0" width="1066px" height="600px" /> 
     {% else %}
         {% if now_playing.image %}
             <img src="{{ now_playing.image}}" class="now_playing" /><br />
         {% endif %}
     {% endif %}
-    <img src="{{ MEDIA_URL}}eq.gif" /> {{ now_playing.artist}} - {{ now_playing.title }} ♪♫<br />
+    <img src="{{ MEDIA_URL}}spectrum-analyzer.gif" /> {{ now_playing.artist}} - {{ now_playing.title }} ♪♫<br />
 {% else %}
     <img src="{{ MEDIA_URL}}no_music_makes_me_sick_by_sakgaa.jpg" /><br />
     :[

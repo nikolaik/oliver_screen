@@ -15,11 +15,12 @@
       var player;
       function onYouTubePlayerAPIReady() {
         player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: 'u1zgFlCw8Aw',
-          controls: 0,
-          border: 0,
+          height: '600',
+          width: '1066',
+          videoId: 'bE47er6qnqg',
+          playerVars: {
+              controls: 0
+          },
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -30,19 +31,15 @@
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         event.target.playVideo();
+        // stop timer
       }
 
       // 5. The API calls this function when the player's state changes.
       //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.ENDED) {
             // restart timer
         }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
     </script>
   </body>
 </html>
