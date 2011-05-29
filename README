@@ -1,0 +1,21 @@
+Requirements
+------------
+* python-django
+* python-pylast
+
+* A LastFM account and a LastFM API account (http://www.last.fm/api/account)
+
+Install
+-------
+* $ git clone git://github.com/nikolaik/oliver_screen.git
+* Rename and edit settings-sample.py to suit your needs.
+* Make static files under oliver_screen/oliver_screen/static available with your webserver of choice.
+* Set MEDIA_URL to the URL where static files are served.
+* Set TEMPLATE_DIRS
+* Set LASTFM_APIKEY and LASTFM_API_SECRET
+* If using mod_wsgi under Apache, first rename and edit django-sample.wsgi. Then setup a WSGIAlias in your apache config pointing to the .wsgi-file.
+* $ python manage.py syncdb (creating an admin user)
+* Make sure the files have correct permission.
+* Goto /admin and login with the admin user and add a username to LastFMUser and make active.
+* Setup your music player (f.ex Spotify) to scrobble to that account.
+* Goto / and you should be set :=)
