@@ -32,6 +32,8 @@ div#now_playing {
 }
 div#now_playing img {
     margin:auto;
+    max-width:800px;
+    max-width:600px;
 }
 div#last_track {
     margin-top:20px;
