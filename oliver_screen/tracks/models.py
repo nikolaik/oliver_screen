@@ -1,7 +1,14 @@
 from django.db import models
 
-# Create your models here.
-#
+class CurrentTrack(models.Model):
+    title = models.CharField(max_length=200)
+    artist = models.CharField(max_length=200)
+    image = models.CharField(max_length=200)
+    retries = models.IntegerField()
+
+    def __unicode__(self):
+        return self.title + " - " + self.artist
+
 class LastFMUser(models.Model):
     name = models.CharField(max_length=200)
     active = models.BooleanField()
