@@ -8,7 +8,7 @@ class LastFMAdmin(admin.ModelAdmin):
 
 class VideoAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None, {'fields': ['title','artist', 'videoId', 'start', 'active']})
+		(None, {'fields': ['artist', 'title', 'videoId', 'start', 'active']})
 	]
 
 admin.site.register(LastFMUser, LastFMAdmin)
