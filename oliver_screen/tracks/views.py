@@ -66,18 +66,17 @@ def get_now_playing(request):
 
 def cache_current(now_playing):
     # Fetch the one CurrentTrack entry in the db and update it with the current track.
-    current = CurrentTrack.objects.get(pk=1)
-    if not current is None:
+    current = []
+    try:
+        current = CurrentTrack.objects.get(pk=1)
+    except:
         #update
-        current.artist = now_playing['artist']
-        current.title = now_playing['title']
-        current.image = now_playing['image']
-        current.retries = 0
-        current.save()
-    else:
-        # First time running? Then creat it.
-        current = CurrentTrack(artist=now_playing.artist, title=now_playing.title, image=now_playing.image, retries=0)
-        current.save()
+        current = CurrentTrack(artist="", title="", image="", retries=0)
+    current.artist = now_playing['artist']
+    current.title = now_playing['title']
+    current.image = now_playing['image']
+    current.retries = 0
+    current.save()
 
 def get_current_from_cache():
     current = []
