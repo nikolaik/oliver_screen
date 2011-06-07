@@ -1,53 +1,18 @@
 {% if now_playing %}
     {% if now_playing.video %}
         <script type="text/javascript">
-            // Stop the reloading of the now_playing div.
-            $( document ).stopTime("now_playing");
-        </script>
-        <div id="player"></div>
-        <script type="text/javascript">
-          // Loads the IFrame Player API code asynchronously.
-          var tag = document.createElement('script');
-          tag.src = "http://www.youtube.com/player_api";
-          var firstScriptTag = document.getElementsByTagName('script')[0];
-          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-          // Creates an <iframe> (and YouTube player)
-          // after the API code downloads.
-          var player;
-          function onYouTubePlayerAPIReady() {
-            player = new YT.Player('player', {
-              width: '1200',
-              height: '675',
-              videoId: '{{ now_playing.video.videoId }}',
-              playerVars: {
-                controls: 0, // no controls
-                iv_load_policy: 3, // no annotations
-                start: {{ now_playing.video.start }} // offset into video (less out of sync)
-              },
-              // Attach to these events.
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-              }
-            });
-          }
-
-          // The API will call this function when the video player is ready.
-          function onPlayerReady(event) {
-            event.target.playVideo();
-            event.target.mute();
-            event.target.setPlaybackQuality("hd720");
-          }
-
-          // The API calls this function when the player's state changes.
-          function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.ENDED) {
-                // restart timer which reloads the now_playing div.
-                $( document ).everyTime('10s', "now_playing", get_now_playing );
+            function play() {
+                if(ytplayer) {
+                    // show the player
+                    $("#player").show();
+                    // start the video (if not playing(1) and not buffering(3))
+                    if( ytplayer.getPlayerState() != 1 && ytplayer.getPlayerState() != 3 ) {
+                        ytplayer.loadVideoById("{{ now_playing.video.videoId }}", {{ now_playing.video.start }}, "hd720");
+                    }
+                }
             }
-          }
-        </script>
+            play();
+           </script>
     {% else %}
         {% if now_playing.image %}
             <img src="{{ now_playing.image}}" class="now_playing" /><br />

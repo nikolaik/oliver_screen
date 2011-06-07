@@ -33,11 +33,12 @@ function init()
 }
 
 function randomRotation() {
-    if(Math.random() <= 0.25) {
+    var draw = Math.random();
+    if(draw <= 0.25) {
         return "deg0";
-    } else if(Math.random() <= 0.5) {
+    } else if(draw <= 0.5) {
         return "deg90";
-    } else if(Math.random() <= 0.75) {
+    } else if(draw <= 0.75) {
         return "deg180";
     } else {
         return "deg270";

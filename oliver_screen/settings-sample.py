@@ -1,5 +1,11 @@
 # Django settings for oliver_screen project.
 
+from os.path import dirname, join
+
+def map_path(target_name):
+	'''Enables path names to be decided at runtime.'''
+	return join(dirname(__file__), target_name).replace('\\', '/')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,7 +18,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'oliver_screen.sqlite3',                      # Or path to database file if using sqlite3.
+        'NAME': map_path('oliver_screen.sqlite3'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -81,7 +87,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/nikk/dev/edb/oliver_screen/oliver_screen/templates'
+    map_path('templates')
 )
 
 INSTALLED_APPS = (
