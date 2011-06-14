@@ -30,5 +30,3 @@ class YouTubeVideo(models.Model):
             return self.artist + " - " + self.title + ": active"
         return self.artist +" - " + self.title + " : NOT active"
 
-
-# TODO: cache current track. avoids overwriting video-iframe if the song is still the same.
