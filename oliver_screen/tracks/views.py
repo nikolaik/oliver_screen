@@ -51,6 +51,8 @@ def get_now_playing(request):
         if len(image) > 0:
             image = image[0].sizes.original
 
+        if "The Shins" in artist.get_name():
+            image = 'http://nikolark.at.neuf.no/the_shins.jpg'
         now_playing = {
             'artist': artist.get_name(),
             'title': track.get_title(),
