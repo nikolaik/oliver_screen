@@ -47,9 +47,10 @@ def get_now_playing(request):
     if not track is None:
         artist = track.get_artist()
         video = get_youtubevideo(artist.get_name(), track.get_title())
-        image = artist.get_images(limit=1)
-        if len(image) > 0:
-            image = image[0].sizes.original
+        image = artist.get_cover_image(size=4)
+
+        if "The Shins" in artist.get_name():
+            image = 'http://nikolark.at.neuf.no/the_shins.jpg'
 
         now_playing = {
             'artist': artist.get_name(),
